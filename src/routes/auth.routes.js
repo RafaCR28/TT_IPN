@@ -1,13 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const { register, login, me } = require('../controllers/auth.controller');
+const authController = require('../controllers/auth.controller');
 const { authenticate } = require('../middlewares/auth.middleware');
 
-router.post('/register', register);
-router.post('/login', login);
-
-// protegido: requiere token
-router.get('/me', authenticate, me);
+router.post('/register', authController.register);
+router.post('/login', authController.login);
+router.get('/me', authenticate, authController.me);
 
 module.exports = router;
